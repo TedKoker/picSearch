@@ -1,3 +1,8 @@
+$small_desktop: 1150px;
+$big_tablet: 950px;
+$tablet: 750px;
+$phone: 550px;
+
 :root {
     --primary-color: #282c34;
     --secendary-color: white;
@@ -13,6 +18,21 @@
 
 html {
     font-size: 67.5%;
+    @media only screen and (max-width: $small_desktop) {
+        font-size: 55%;
+    }
+
+    @media only screen and (max-width: $big_tablet) {
+        font-size: 50%;
+    }
+
+    @media only screen and (max-width: $big_tablet) {
+        font-size: 45%;
+    }
+
+    @media only screen and (max-width: $phone) {
+        font-size: 40%;
+    }
 }
 
 .search {

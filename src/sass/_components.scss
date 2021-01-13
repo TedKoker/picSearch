@@ -5,6 +5,22 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 
+    @media only screen and (max-width: $small_desktop) {
+        width: 60%;
+    }
+
+    @media only screen and (max-width: $big_tablet) {
+        width: 70%;
+    }
+
+    @media only screen and (max-width: $tablet) {
+        width: 75%;
+    }
+
+    @media only screen and (max-width: $phone) {
+        width: 80%;
+    }
+
     &__item {
         display: flex;
         align-items: center;

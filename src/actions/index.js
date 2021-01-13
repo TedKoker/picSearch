@@ -7,10 +7,6 @@ export const searchPicsAction = (formObj, page) => async dispatch => {
     let res
     if(!page) {
         page = 1
-        dispatch( {
-            type: PICS_ARRAY,
-            payload: []
-        })
     }
     
     res = await axios.get(`https://pixabay.com/api/?key=19861954-ae9b65d828f6ad091ad5cb99c&q=${search}&per_page=50&page=${page}`,)

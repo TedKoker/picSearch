@@ -5,6 +5,7 @@ import Pictures from './components/Pictures'
 import './sass/main.scss'
 
 function App() {
+  
   return (
     <div>
       <Search />
