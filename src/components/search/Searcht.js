@@ -5,7 +5,7 @@ import SearchHistory from './SearchHistory'
 function SerchComponent() {
 
     return (
-        <div>
+        <div className="search">
             <SearchForm />
             <SearchHistory />
         </div>

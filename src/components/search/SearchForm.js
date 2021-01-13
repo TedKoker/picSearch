@@ -42,20 +42,21 @@ function SearchForm() {
     }
 
     return(
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="form">
             {formFields.map((feild, index) => 
-                <div key={index}>
-                    <label htmlFor={feild.name}>{feild.text}</label> 
+                <div key={index} className="form__item form__item--full">
                     <input
                         index={index}
                         type="text" 
                         name={feild.name} 
                         id={feild.name} 
                         onChange={handleChange} 
+                        placeholder={" "}
                         valid={feild.validators.length === 0 ? 1 : 0}/>
+                    <label htmlFor={feild.name}>{feild.text}</label> 
                 </div>
             )}
-            <button type="submit">Search</button>
+            <button className="button button--light button--big" type="submit">Search</button>
         </form>
     )
 }

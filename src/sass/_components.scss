@@ -1,0 +1,63 @@
+.form {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    &__item {
+        position: relative;
+        label {
+            color:black;
+            position: absolute;
+            transition: transform .2s ;
+            top: 0;
+            left: 1rem;
+        }
+
+        input {
+            border-radius: 100px;
+            padding: .3rem 1rem;
+        }
+
+        &:focus-within label,
+        input:not(:placeholder-shown) + label {
+            color:white;
+            transform: translateY(-100%);
+        }
+
+        &--full {
+            grid-column: 1 / -1;
+    
+            label {
+                width: 100%;
+            }
+            input {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.button {
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all .2s;
+
+    &--light {
+        background-color:var(--secendary-color);
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+
+        &:hover {
+            background-color:var(--primary-color);
+            color: var(--secendary-color);
+            border: 1px solid var(--secendary-color);
+        }
+    }
+
+    &--big {
+        font-size: var(--big-font);
+        padding: .5rem 1rem;
+    }
+}

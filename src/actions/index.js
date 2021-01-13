@@ -8,6 +8,7 @@ export const searchPicsAction = (formObj) => async dispatch => {
 
     res = await axios.get(`https://pixabay.com/api/?key=19861954-ae9b65d828f6ad091ad5cb99c&q=${search}`,)
 
+
     dispatch( {
         type: SEARCH_HISTORY,
         payload: search

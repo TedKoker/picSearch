@@ -1,6 +1,6 @@
 import React from 'react'
-
 import Search from './components/search/Searcht' 
+import './sass/main.scss'
 
 function App() {
   return (
