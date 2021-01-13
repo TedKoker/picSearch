@@ -3,7 +3,6 @@ import {useHistory} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import {useQuery} from '../shared-logic/shared-components'
 import {searchPicsAction} from '../actions'
-import userEvent from '@testing-library/user-event'
 
 function Pictures() {
 
@@ -15,27 +14,42 @@ function Pictures() {
     const [gallery, setGallery] = useState([])
     const gallryElement = useRef()
 
+
     useEffect(() => {
         const q = query.get("q")
+        console.log(gallery)
         if(!q) {
             history.goBack()
         }
-
+        
         if(q !== searchHistory[0] || searchHistory.length === 0) {
-            dispatch(searchPicsAction({search: q}, true))
+            dispatch(searchPicsAction({search: q}))
         }
 
-        const scrollEfect = window.addEventListener('scroll', (e) => {
-            if ((window.innerHeight + window.scrollY) > document.body.offsetHeight) {
-                console.log(gallryElement.current.children.length)
-                dispatch(searchPicsAction({search: q}, true, gallryElement.current.children.length/50 + 1))
-            }
-        })
-    },[])
+        return() => {
+            console.log("hello")
+            setGallery([])
+        }
+
+    }, [])
 
     useEffect(() => {
-        const tempArr =  gallery ? [...gallery] : []
+        function scrollPagination() {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                dispatch(searchPicsAction({search: query.get("q")}, gallryElement.current.children.length/50 + 1))
+            }
+        }
+        window.addEventListener('scroll',scrollPagination)
+        
+
+        return () => {
+            window.removeEventListener("scroll", scrollPagination)
+        }
+    }, [searchHistory])
+
+    useEffect(() => {
         if(picsArray) {
+            let tempArr =  gallery &&  query.get("q") === searchHistory[0] ? [...gallery] : []
             picsArray.forEach((pic) => {
                 tempArr.push(<div key={tempArr.length} className="gallery__item">
                     <img  src={pic.previewURL} />
@@ -45,12 +59,8 @@ function Pictures() {
         }
     },[picsArray])
 
-    const handleScrollPagination = (e) => {
-        console.log(e)
-    }
-
     return(
-        <div ref={gallryElement} className="gallery" onScroll={handleScrollPagination}>
+        <div ref={gallryElement} className="gallery">
             {
                 gallery.map(item => item)
             }

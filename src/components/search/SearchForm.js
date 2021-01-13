@@ -64,7 +64,7 @@ function SearchForm({smallFormClass}) {
                         name={feild.name} 
                         id={feild.name} 
                         onChange={handleChange} 
-                        placeholder={" "}
+                        placeholder={smallFormClass ? "search" : " "}
                         valid={feild.validators.length === 0 ? 1 : 0}/>
                     <label htmlFor={feild.name}>{feild.text}</label> 
                 </div>

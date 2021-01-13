@@ -26,13 +26,30 @@ html {
     justify-content: center;
     font-size: var(--big-font);
     transition: height .2s;
+    position: relative;
 
     button {
         margin-top: 1rem;
     }
 
+    &__back {
+        position: absolute;
+        left: 2rem;
+        top: 0;
+        transform: translateY(-1rem);
+        margin: auto;
+        font-size: 7rem;
+        display: flex;
+        cursor: pointer;
+        transition: all .2s;
+        &:hover {
+            transform: scale(1.2) translateY(-1rem);
+        }
+    }
+
     &__small {
-        height: 10vh;
+        width: 100%;
+        height: 8rem;
     }
 }
 
