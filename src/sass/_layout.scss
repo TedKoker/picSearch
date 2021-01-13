@@ -2,6 +2,7 @@
     --primary-color: #282c34;
     --secendary-color: white;
     --big-font: 3rem;
+    --medium-font: 2rem;
 }
 
 *{
@@ -24,9 +25,14 @@ html {
     align-items: center;
     justify-content: center;
     font-size: var(--big-font);
+    transition: height .2s;
 
     button {
         margin-top: 1rem;
+    }
+
+    &__small {
+        height: 10vh;
     }
 }
 
@@ -49,5 +55,17 @@ html {
                 transform: scale(1.2);
             }
         }
+    }
+}
+
+.gallery {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(7, 1fr);
+    width: 100%;
+    
+    img {
+        object-fit: fill;
+        width: 100%;
     }
 }

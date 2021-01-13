@@ -1,15 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {useDispatch} from 'react-redux'
+import {useHistory} from 'react-router-dom'
 import {searchPicsAction} from '../../actions/index'
 import {required} from '../../shared-logic/validators'
 
-function SearchForm() {
+function SearchForm({smallFormClass}) {
 
 
     const [formFields] = useState([
         {name: "search", text: "What do you want to search?", validators: [required]}
     ])
     const dispatch = useDispatch()
+    const history = useHistory()
+    const [classSelection, setClassSelection] = useState({
+        form: "",
+        button: ""
+    })
+
+    useEffect(() => {
+        const tempObj = {...classSelection}
+        tempObj.form = smallFormClass ? "form form__small" : "form"
+        tempObj.button = smallFormClass ? "button button--light button--small" : "button button--light button--big"
+        setClassSelection(tempObj)
+    }, [smallFormClass])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,7 +37,7 @@ function SearchForm() {
 
         if(formValid) {
             dispatch(searchPicsAction(formObj))
-            /**Call the action */
+            history.push(`/search?q=${formObj.search}`)
         }
     }
 
@@ -42,9 +55,9 @@ function SearchForm() {
     }
 
     return(
-        <form onSubmit={handleSubmit} className="form">
+        <form onSubmit={handleSubmit} className={classSelection.form}>
             {formFields.map((feild, index) => 
-                <div key={index} className="form__item form__item--full">
+                <div key={index} className="form__item">
                     <input
                         index={index}
                         type="text" 
@@ -56,7 +69,10 @@ function SearchForm() {
                     <label htmlFor={feild.name}>{feild.text}</label> 
                 </div>
             )}
-            <button className="button button--light button--big" type="submit">Search</button>
+            <div className="form__button">
+                <button className={classSelection.button} 
+                    type="submit">Search</button>
+            </div>
         </form>
     )
 }
