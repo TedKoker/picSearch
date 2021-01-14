@@ -11,9 +11,6 @@ export default function(state={}, action) {
                 array.pop()
             }
             return {...state, searchHistory: array}
-
-        case PICS_ARRAY:
-            return {...state, picsArray: action.payload}
         
         default:
             return state

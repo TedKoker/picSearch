@@ -3,12 +3,13 @@ import {useDispatch} from 'react-redux'
 import {useHistory} from 'react-router-dom'
 import {addToHistory} from '../../actions/index'
 import {required} from '../../shared-logic/validators'
+import {useQuery} from '../../shared-logic/shared-components'
 
 function SearchForm({smallFormClass}) {
 
-
+    const query = useQuery()
     const [formFields] = useState([
-        {name: "search", text: "What do you want to search?", validators: [required]}
+        {name: "search", text: "What do you want to search?", validators: [required], defaultValue: query.get("q") ? query.get("q") : undefined}
     ])
     const dispatch = useDispatch()
     const history = useHistory()
@@ -62,7 +63,8 @@ function SearchForm({smallFormClass}) {
                         index={index}
                         type="text" 
                         name={feild.name} 
-                        id={feild.name} 
+                        id={feild.name}
+                        defaultValue={feild.defaultValue }
                         onChange={handleChange} 
                         placeholder={smallFormClass ? "search" : " "}
                         valid={feild.validators.length === 0 ? 1 : 0}/>

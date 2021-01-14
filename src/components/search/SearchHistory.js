@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {useHistory} from 'react-router-dom'
-import {searchPicsAction} from '../../actions'
+import { addToHistory} from '../../actions'
 
 function SearchHistory() {
 
@@ -10,7 +10,7 @@ function SearchHistory() {
     const history = useHistory()
 
     const handleClick = (e) => {
-        dispatch(searchPicsAction({search: e.target.getAttribute("value")}))
+        dispatch(addToHistory({search: e.target.getAttribute("value")}))
         history.push(`/search?q=${e.target.getAttribute("value")}`)
     }
 
