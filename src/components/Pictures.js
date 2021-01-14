@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux'
 import {useQuery} from '../shared-logic/shared-components'
 import { addToHistory} from '../actions'
 import {loadPics} from '../shared-logic/api-call'
+import Modal from 'react-modal'
 
 function Pictures() {
 
@@ -12,6 +13,15 @@ function Pictures() {
     const searchHistory = useSelector(state => state.searchHistory)
     const [gallery, setGallery] = useState([])
     const [galleryHistory, setGalleryHistory] = useState([])
+    const [showPic, setShowPic] = useState()
+
+    const setFullPic = (src) => {
+        setShowPic(src)
+    }
+
+    const removeFullPic = () => {
+        setShowPic(undefined)
+    }
 
     useEffect(() => {
         const q = query.get("q")
@@ -25,9 +35,10 @@ function Pictures() {
 
     const loadGallery = (page) => {
         loadPics(query.get("q"), page).then(resp => {
+            console.log(resp.data.hits)
             const tempArr = page===1 ? [] : [...galleryHistory]
             resp.data.hits.forEach(pic => {
-                tempArr.push(<div key={tempArr.length} className="gallery__item">
+                tempArr.push(<div key={tempArr.length} onClick={() => {setFullPic(pic.largeImageURL)}} className="gallery__item">
                     <img  src={pic.previewURL} />
                 </div>)
             })
@@ -62,8 +73,15 @@ function Pictures() {
     return(
         <div className="gallery">
             {
-                [...gallery]
+                gallery.length > 0 ? [...gallery] : <div className="gallery__empty-results">No Results :(</div>
             }
+            <Modal
+                isOpen = {showPic !== undefined}
+                onRequestClose = {removeFullPic}
+                style={{content: {padding:"0"}}}
+            >
+                <img src={showPic} />
+            </Modal>
         </div>
     )
 }

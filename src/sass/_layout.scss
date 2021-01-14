@@ -105,6 +105,7 @@ html {
     grid-template-columns: repeat(7, 1fr);
     width: 100%;
     grid-auto-rows: 15rem;
+    margin-top: 2rem;
     overflow: hidden;
 
     @media only screen and (max-width: $medium_desktop) {
@@ -129,10 +130,27 @@ html {
     
     &__item {
         overflow: hidden;
+
         img {
             object-fit: fill;
-            width: 100%;
+            width: 99%;
+            max-height: 99%;
             overflow: hidden;
+            cursor: pointer;
+
+            &:hover {
+                border: 1px solid var(--primary-color); 
+            }
         }
+    }  
+    &__empty-results {
+        grid-column: 1 / -1;
+        grid-row: 1/3;
+        width: 100%;
+        font-size: 5rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
