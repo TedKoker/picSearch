@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {useDispatch} from 'react-redux'
 import {useHistory} from 'react-router-dom'
-import {searchPicsAction, addToHistory} from '../../actions/index'
+import {addToHistory} from '../../actions/index'
 import {required} from '../../shared-logic/validators'
 
 function SearchForm({smallFormClass}) {
@@ -36,7 +36,6 @@ function SearchForm({smallFormClass}) {
         })
 
         if(formValid) {
-            // dispatch(searchPicsAction(formObj))
             dispatch(addToHistory(formObj))
             history.push(`/search?q=${formObj.search}`)
         }
