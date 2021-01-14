@@ -1,7 +1,11 @@
+$medium_desktop: 1500px;
+$medium_small_desktop: 1250px;
 $small_desktop: 1150px;
 $big_tablet: 950px;
 $tablet: 750px;
 $phone: 550px;
+$small_phone: 470px;
+
 
 :root {
     --primary-color: #282c34;
@@ -102,6 +106,26 @@ html {
     width: 100%;
     grid-auto-rows: 15rem;
     overflow: hidden;
+
+    @media only screen and (max-width: $medium_desktop) {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    @media only screen and (max-width: $medium_small_desktop) {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    @media only screen and (max-width: $big_tablet) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media only screen and (max-width: $tablet) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media only screen and (max-width: $phone) {
+        grid-template-columns: repeat(2, 1fr);
+    }
     
     &__item {
         overflow: hidden;
