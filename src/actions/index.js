@@ -21,3 +21,13 @@ export const searchPicsAction = (formObj, page) => async dispatch => {
         payload: search
     })
 }
+
+export const addToHistory = (formObj) => {
+
+    const {search} = formObj
+
+    return {
+        type: SEARCH_HISTORY,
+        payload: search
+    }
+}
